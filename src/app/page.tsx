@@ -7,8 +7,7 @@ import { CardWithForm } from "@/components/ui/CardWithForm";
 import { fetchPaginatedVocabInstantFeedback } from "@/lib/data";
 
 export default async function Page() {
-  const words = await fetchPaginatedVocabInstantFeedback(5,1);
-
+  const words = await fetchPaginatedVocabInstantFeedback(6, 1);
   return (
     <div className="flex flex-col gap-4 justify-start">
       <div className="grid auto-rows-max lg:grid-cols-3 lg:gap-4 md:grid-cols-2 md:gap-4 sm:grid-cols-1 sm:gap-y-4">
@@ -16,10 +15,10 @@ export default async function Page() {
           <VocabCard key={i} word={wordItem} />
         ))}
       </div>
-      
-        <VocabCreate />
-        <CardWithForm />
-      
+
+      <VocabCreate />
+      <CardWithForm />
+
       <div className="flex justify-center space-x-4">
         <ButtonLoading variant={"default"} isLoading={true}>
           Click Me

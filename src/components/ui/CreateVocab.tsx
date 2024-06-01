@@ -6,7 +6,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -17,7 +16,6 @@ import {
   FormControl,
   FormItem,
   FormLabel,
-  FormDescription,
   FormMessage,
 } from "./form";
 import { X } from "lucide-react";
@@ -25,6 +23,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Textarea } from "./textarea";
+import { insertVocabItem } from "@/lib/data";
 
 export function CreateVocab() {
   const formSchema = z.object({
@@ -52,10 +51,20 @@ export function CreateVocab() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const newItem = {
+        vocab_image_url: values.image_url,
+        vocab_word: values.word,
+        vocab_definition: values.definition,
+        vocab_context: values.context,
+        vocab_example: values.example,
+      };
+      const insertedItem = await insertVocabItem(newItem);
+      console.log("Inserted item:", insertedItem);
+    } catch (error) {
+      console.error("Error inserting vocabulary item:", error);
+    }
   }
 
   return (

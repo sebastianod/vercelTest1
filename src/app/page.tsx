@@ -2,11 +2,13 @@ import { ButtonLoading } from "@/components/ui/buttonLoading";
 import VocabCard from "@/components/ui/VocabCard";
 import { CreateVocab } from "@/components/ui/CreateVocab";
 //import words from "../lib/vocabData.json"; //mock data
-//import { fetchAllVocabInstantFeedback } from "@/lib/data";
+import { fetchAllVocabInstantFeedback } from "@/lib/data";
 import { fetchPaginatedVocabInstantFeedback } from "@/lib/data";
 
 export default async function Page() {
-  const words = await fetchPaginatedVocabInstantFeedback(6, 1);
+  //const words = await fetchAllVocabInstantFeedback();
+  const words = await fetchPaginatedVocabInstantFeedback(100, 1);
+
   return (
     <div className="flex flex-col justify-center gap-4">
       <div className="flex justify-center">

@@ -4,7 +4,7 @@ import { VocabItem } from "@/components/ui/VocabCard";
 
 export async function fetchAllVocabInstantFeedback() {
   try {
-    const data = await sql<VocabItem>`SELECT * FROM vocabularycards`;
+    const data = await sql<VocabItem>`SELECT * FROM vocabularycards LIMIT 1000`;
     return data.rows;
   } catch (error) {
     console.error("Database Error:", error);
@@ -52,8 +52,9 @@ export async function insertVocabItem(newItem: NewVocabItem) {
         (vocab_image_url, vocab_word, vocab_definition, vocab_context, vocab_example)
         VALUES (${newItem.vocab_image_url}, ${newItem.vocab_word}, ${newItem.vocab_definition}, ${newItem.vocab_context}, ${newItem.vocab_example});
       `;
+    return true; // Return true if the insert was successful
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to insert vocabulary data.");
+    return false; // Return true if the insert was successful
   }
 }

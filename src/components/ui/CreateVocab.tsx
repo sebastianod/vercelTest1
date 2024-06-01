@@ -24,8 +24,15 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Textarea } from "./textarea";
 import { insertVocabItem } from "@/lib/data";
+import { useState } from "react";
+import { ButtonLoading } from "./buttonLoading";
 
 export function CreateVocab() {
+  const [submissionSuccess, setSubmissionSuccess] = useState<boolean | null>(
+    null,
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const formSchema = z.object({
     image_url: z.union([z.literal(""), z.string().trim().url()]),
     word: z
@@ -52,6 +59,7 @@ export function CreateVocab() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
     try {
       const newItem = {
         vocab_image_url: values.image_url,
@@ -60,10 +68,15 @@ export function CreateVocab() {
         vocab_context: values.context,
         vocab_example: values.example,
       };
-      const insertedItem = await insertVocabItem(newItem);
-      console.log("Inserted item:", insertedItem);
+      const success = await insertVocabItem(newItem);
+      setSubmissionSuccess(success);
+      setIsLoading(false);
+      console.log("success?", success);
     } catch (error) {
       console.error("Error inserting vocabulary item:", error);
+      setSubmissionSuccess(false);
+      setIsLoading(false);
+      console.log("success?", false);
     }
   }
 
@@ -150,8 +163,9 @@ export function CreateVocab() {
                 )}
               />
             </div>
-
-            <Button type="submit">Submit</Button>
+            <ButtonLoading type="submit" isLoading={isLoading}>
+              Submit
+            </ButtonLoading>
           </form>
         </Form>
       </CardContent>

@@ -12,13 +12,13 @@ import {
 import { Pencil, Trash2 } from "lucide-react";
 
 export interface VocabItem {
-    vocab_id: number;
-    vocab_image_url?: string;
-    vocab_word: string;
-    vocab_definition: string;
-    vocab_context?: string;
-    vocab_example?: string;
-    vocab_created: Date;
+  vocab_id: number;
+  vocab_image_url?: string;
+  vocab_word: string;
+  vocab_definition: string;
+  vocab_context?: string;
+  vocab_example?: string;
+  vocab_created: Date;
 }
 
 interface VocabCardProps {
@@ -27,7 +27,7 @@ interface VocabCardProps {
 
 const VocabCard: React.FC<VocabCardProps> = ({ word }) => {
   return (
-    <Card className="max-w-sm min-w-32 h-fit hover:scale-[1.02] hover:shadow-slate-700 transition ease-out duration-300">
+    <Card className="max-w-lg min-w-24 h-fit hover:scale-[1.02] hover:shadow-slate-700 transition ease-out duration-300">
       <CardImage src={word.vocab_image_url} alt={word.vocab_word} />
       <CardHeader>
         <CardTitle>{word.vocab_word}</CardTitle>
@@ -38,8 +38,8 @@ const VocabCard: React.FC<VocabCardProps> = ({ word }) => {
         <p>{word.vocab_example}</p>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Pencil className=" cursor-pointer"/>
-        <Trash2 className=" cursor-pointer"/>
+        <Pencil className=" cursor-pointer" />
+        <Trash2 className=" cursor-pointer" />
       </CardFooter>
     </Card>
   );

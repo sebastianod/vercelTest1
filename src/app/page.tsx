@@ -10,7 +10,7 @@ export default async function Page() {
   const words = await fetchPaginatedVocabInstantFeedback(6, 1);
   return (
     <div className="flex flex-col gap-4 justify-start">
-      <div className="grid auto-rows-max lg:grid-cols-3 lg:gap-4 md:grid-cols-2 md:gap-4 sm:grid-cols-1 sm:gap-y-4">
+      <div className="grid auto-rows-max gap-4 grid-cols-1 justify-items-center 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
         {words.map((wordItem, i) => (
           <VocabCard key={i} word={wordItem} />
         ))}

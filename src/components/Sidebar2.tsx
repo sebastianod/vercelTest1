@@ -23,7 +23,7 @@ export default function Sidebar() {
   return (
     <div
       className={`flex flex-col gap-4 border rounded-md min-h-screen p-4 transition-all duration-300 items-start bg-slate-900 text-white ${
-        isExpanded ? "w-[250px] max-w-[250px] overflow-hidden" : "w-14"
+        isExpanded ? "w-[250px] min-w-[250px] overflow-hidden" : "w-14"
       }`}
     >
       <div className="flex justify-between w-full">
@@ -32,7 +32,7 @@ export default function Sidebar() {
 
       <div className="transition-all mt-4 flex flex-col gap-4 w-full">
         <div className="flex flex-col border-b pb-2 gap-3">
-          <div className="flex gap-2 cursor-pointer items-center">
+          <div className="flex gap-2 cursor-pointer items-center transition ease-in duration-150 hover:bg-slate-700 rounded-md">
             <div className="w-6 flex justify-center">
               <UserRound />
             </div>
@@ -40,7 +40,7 @@ export default function Sidebar() {
               Profile
             </span>
           </div>
-          <div className="flex gap-2 cursor-pointer items-center">
+          <div className="flex gap-2 cursor-pointer items-center transition ease-in duration-150 hover:bg-slate-700 rounded-md">
             <div className="w-6 flex justify-center">
               <Gauge />
             </div>
@@ -48,7 +48,7 @@ export default function Sidebar() {
               Dashboard
             </span>
           </div>
-          <div className="flex gap-2 cursor-pointer items-center">
+          <div className="flex gap-2 cursor-pointer items-center transition ease-in duration-150 hover:bg-slate-700 rounded-md">
             <div className="w-6 flex justify-center">
               <ListChecks />
             </div>
@@ -58,7 +58,7 @@ export default function Sidebar() {
           </div>
         </div>
         <div className="flex flex-col gap-3 border-b pb-2">
-          <div className="flex gap-2 cursor-pointer items-center">
+          <div className="flex gap-2 cursor-pointer items-center transition ease-in duration-150 hover:bg-slate-700 rounded-md">
             <div className="w-6 flex justify-center">
               <Library />
             </div>
@@ -66,7 +66,7 @@ export default function Sidebar() {
               Instant feedback
             </span>
           </div>
-          <div className="flex gap-2 cursor-pointer items-center">
+          <div className="flex gap-2 cursor-pointer items-center transition ease-in duration-150 hover:bg-slate-700 rounded-md">
             <div className="w-6 flex justify-center">
               <FlagTriangleRight />
             </div>
@@ -76,7 +76,7 @@ export default function Sidebar() {
           </div>
         </div>
         <div className="flex flex-col gap-3 border-b pb-2">
-          <div className="flex gap-2 cursor-pointer items-center">
+          <div className="flex gap-2 cursor-pointer items-center transition ease-in duration-150 hover:bg-slate-700 rounded-md">
             <div className="w-6 flex justify-center">
               <CircleCheckBig />
             </div>
@@ -84,7 +84,7 @@ export default function Sidebar() {
               Cards quiz
             </span>
           </div>
-          <div className="flex gap-2 cursor-pointer items-center">
+          <div className="flex gap-2 cursor-pointer items-center transition ease-in duration-150 hover:bg-slate-700 rounded-md">
             <div className="w-6 flex justify-center">
               <Sparkles />
             </div>

@@ -27,19 +27,21 @@ interface VocabCardProps {
 
 const VocabCard: React.FC<VocabCardProps> = ({ word }) => {
   return (
-    <Card className="max-w-lg min-w-24 h-fit hover:scale-[1.02] hover:shadow-slate-700 transition ease-out duration-300">
+    <Card className="h-fit min-w-24 max-w-lg transition duration-300 ease-out hover:scale-[1.02] hover:shadow-slate-700">
       <CardImage src={word.vocab_image_url} alt={word.vocab_word} />
       <CardHeader>
         <CardTitle>{word.vocab_word}</CardTitle>
         <CardDescription>{word.vocab_definition}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-2">
+        <CardSubTitle>Context</CardSubTitle>
+        <p>{word.vocab_context}</p>
         <CardSubTitle>Example</CardSubTitle>
         <p>{word.vocab_example}</p>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Pencil className=" cursor-pointer" />
-        <Trash2 className=" cursor-pointer" />
+        <Pencil className="cursor-pointer" />
+        <Trash2 className="cursor-pointer" />
       </CardFooter>
     </Card>
   );

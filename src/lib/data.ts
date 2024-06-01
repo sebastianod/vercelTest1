@@ -14,7 +14,7 @@ export async function fetchAllVocabInstantFeedback() {
 }
 
 export async function fetchPaginatedVocabInstantFeedback(items: number, page: number) {
-    const pageItems: number = items; // Ensuring items is correctly typed as number
+    const pageItems: number = items;
     const pageNumber: number = page;
   
     const offset: number = (pageNumber - 1) * pageItems;

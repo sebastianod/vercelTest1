@@ -7,7 +7,6 @@ import { CardWithForm } from "@/components/ui/CardWithForm";
 import { fetchPaginatedVocabInstantFeedback } from "@/lib/data";
 
 export default async function Page() {
-  //const words = await fetchVocabInstantFeedback()
   const words = await fetchPaginatedVocabInstantFeedback(5,1);
 
   return (

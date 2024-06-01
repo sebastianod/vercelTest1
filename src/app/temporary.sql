@@ -157,3 +157,13 @@ CREATE TABLE Scores (
     scores_avg_quiz_questions FLOAT NOT NULL,
     PRIMARY KEY (scores_user_id, scores_class_id)
 );
+-- I actually have this table in the DB
+CREATE TABLE VocabularyCards (
+    vocab_id SERIAL PRIMARY KEY,
+    vocab_image_url VARCHAR(255),
+    vocab_word VARCHAR(100) NOT NULL,
+    vocab_definition TEXT NOT NULL,
+    vocab_context TEXT,
+    vocab_example TEXT,
+    vocab_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+);

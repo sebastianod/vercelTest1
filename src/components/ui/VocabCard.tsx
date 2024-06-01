@@ -38,8 +38,8 @@ const VocabCard: React.FC<VocabCardProps> = ({ word }) => {
         <p>{word.vocab_example}</p>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Pencil/>
-        <Trash2/>
+        <Pencil className=" cursor-pointer"/>
+        <Trash2 className=" cursor-pointer"/>
       </CardFooter>
     </Card>
   );

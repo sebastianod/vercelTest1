@@ -15,7 +15,7 @@ export default async function Page() {
         <CreateVocab />
       </div>
 
-      <div className="grid auto-rows-max grid-cols-1 justify-items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+      <div className="grid auto-rows-max grid-cols-1 justify-items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {words.map((wordItem, i) => (
           <VocabCard key={i} word={wordItem} />
         ))}

@@ -1,7 +1,5 @@
 "use client";
 import * as React from "react";
-
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -58,7 +56,7 @@ export function CreateVocab() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function submitNewVocab(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     try {
       const newItem = {
@@ -91,7 +89,10 @@ export function CreateVocab() {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form
+            onSubmit={form.handleSubmit(submitNewVocab)}
+            className="space-y-8"
+          >
             <div className="grid auto-rows-max grid-cols-2 justify-items-center gap-1">
               <FormField
                 control={form.control}

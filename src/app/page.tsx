@@ -1,10 +1,9 @@
 import { ButtonLoading } from "@/components/ui/buttonLoading";
 import VocabCard from "@/components/ui/VocabCard";
-import { CreateVocab } from "@/components/ui/CreateVocab";
 //import words from "../lib/vocabData.json"; //mock data
 import { fetchAllVocabInstantFeedback } from "@/lib/data";
 import { fetchPaginatedVocabInstantFeedback } from "@/lib/data";
-import { DialogDemo } from "@/components/ui/dialogDemo";
+import { DialogCreateVocab } from "@/components/ui/dialogCreateVocab";
 
 export default async function Page() {
   const words = await fetchAllVocabInstantFeedback();
@@ -16,8 +15,7 @@ export default async function Page() {
   return (
     <div className="flex flex-col justify-center gap-4">
       <div className="flex justify-center">
-        <CreateVocab />
-        <DialogDemo />
+        <DialogCreateVocab />
       </div>
 
       <div className="grid auto-rows-max grid-cols-1 justify-items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

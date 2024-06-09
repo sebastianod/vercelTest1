@@ -28,7 +28,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertVocabItem } from "@/lib/data";
 
-export function DialogDemo() {
+export function DialogCreateVocab() {
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean | null>(
     null,
   );
@@ -115,20 +115,6 @@ export function DialogDemo() {
 
               <FormField
                 control={form.control}
-                name="example"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Example</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
                 name="definition"
                 render={({ field }) => (
                   <FormItem>
@@ -163,6 +149,20 @@ export function DialogDemo() {
                     <FormLabel>Image Url</FormLabel>
                     <FormControl>
                       <Input placeholder="" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="example"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Example</FormLabel>
+                    <FormControl>
+                      <Textarea placeholder="" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

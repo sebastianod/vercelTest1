@@ -34,14 +34,22 @@ const VocabCard: React.FC<VocabCardProps> = ({ word }) => {
 
   return (
     <Card className="h-fit min-w-72 max-w-96 transition duration-300 ease-out hover:scale-[1.02] hover:shadow-slate-700">
-      <CardImage src={word.vocab_image_url} alt={word.vocab_word} />
+      {word.vocab_image_url && (
+        <CardImage src={word.vocab_image_url} alt={word.vocab_word} />
+      )}
       <CardHeader>
         <CardTitle>{word.vocab_word}</CardTitle>
         <div className="flex justify-center">
           {isExpanded ? (
-            <ChevronUp className="cursor-pointer" onClick={toggleExpansion} />
+            <ChevronUp
+              className="cursor-pointer text-slate-400 hover:text-black"
+              onClick={toggleExpansion}
+            />
           ) : (
-            <ChevronDown className="cursor-pointer" onClick={toggleExpansion} />
+            <ChevronDown
+              className="cursor-pointer text-slate-400 hover:text-black"
+              onClick={toggleExpansion}
+            />
           )}
         </div>
       </CardHeader>

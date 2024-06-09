@@ -4,21 +4,24 @@ import { CreateVocab } from "@/components/ui/CreateVocab";
 //import words from "../lib/vocabData.json"; //mock data
 import { fetchAllVocabInstantFeedback } from "@/lib/data";
 import { fetchPaginatedVocabInstantFeedback } from "@/lib/data";
+import { DialogDemo } from "@/components/ui/dialogDemo";
 
 export default async function Page() {
   const words = await fetchAllVocabInstantFeedback();
   //const words = await fetchPaginatedVocabInstantFeedback(100, 1);
+  const showVocab = () => {
+    return words.map((wordItem, i) => <VocabCard key={i} word={wordItem} />);
+  };
 
   return (
     <div className="flex flex-col justify-center gap-4">
       <div className="flex justify-center">
         <CreateVocab />
+        <DialogDemo />
       </div>
 
       <div className="grid auto-rows-max grid-cols-1 justify-items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {words.map((wordItem, i) => (
-          <VocabCard key={i} word={wordItem} />
-        ))}
+        {showVocab()}
       </div>
 
       <div className="flex justify-center space-x-4">

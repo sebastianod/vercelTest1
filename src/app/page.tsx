@@ -4,11 +4,10 @@ import { CreateVocab } from "@/components/ui/CreateVocab";
 //import words from "../lib/vocabData.json"; //mock data
 import { fetchAllVocabInstantFeedback } from "@/lib/data";
 import { fetchPaginatedVocabInstantFeedback } from "@/lib/data";
-import { unstable_noStore } from "next/cache";
-unstable_noStore();
+
 export default async function Page() {
-  //const words = await fetchAllVocabInstantFeedback();
   const words = await fetchAllVocabInstantFeedback();
+  //const words = await fetchPaginatedVocabInstantFeedback(100, 1);
 
   return (
     <div className="flex flex-col justify-center gap-4">

@@ -1,8 +1,10 @@
 "use server";
 import { sql } from "@vercel/postgres";
 import { VocabItem } from "@/components/ui/VocabCard";
+import { unstable_noStore as noStore } from "next/cache";
 
 export async function fetchAllVocabInstantFeedback() {
+  noStore();
   try {
     const data = await sql<VocabItem>`SELECT * FROM vocabularycards LIMIT 1000`;
     return data.rows;
@@ -18,6 +20,7 @@ export async function fetchPaginatedVocabInstantFeedback(
   items: number,
   page: number,
 ) {
+  noStore();
   const pageItems: number = items;
   const pageNumber: number = page;
 

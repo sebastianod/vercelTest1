@@ -18,7 +18,7 @@ export default async function Page() {
         <DialogCreateVocab />
       </div>
 
-      <div className="grid auto-rows-max grid-cols-1 justify-items-center gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      <div className="columns-1 gap-7 space-y-4 md:columns-2 xl:columns-3">
         {showVocab()}
       </div>
 

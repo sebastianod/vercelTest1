@@ -32,18 +32,15 @@ const VocabCard: React.FC<VocabCardProps> = ({ word }) => {
     setIsExpanded(!isExpanded);
   };
 
+  // layout="fill"
+  //     objectFit="cover"
+  //     objectPosition="center"
   const imageUrl = word.vocab_image_url
     ? word.vocab_image_url
     : "/defaultImage.png";
 
-  // layout="fill"
-  //     objectFit="cover"
-  //     objectPosition="center"
-
   return (
-    <Card
-      className={`h-fit min-w-80 max-w-max transition duration-300 ease-out hover:scale-[1.02] hover:shadow-slate-700`}
-    >
+    <Card className="h-fit min-w-64 max-w-3xl break-inside-avoid rounded-md border transition duration-300 ease-out hover:scale-[1.02] hover:shadow-slate-700">
       <div className="relative aspect-[500/300]">
         <CardImage
           src={imageUrl}
@@ -57,40 +54,38 @@ const VocabCard: React.FC<VocabCardProps> = ({ word }) => {
         />
       </div>
 
-      <div>
-        <CardHeader>
-          <CardTitle>{word.vocab_word}</CardTitle>
-          <div className="flex justify-center">
-            {isExpanded ? (
-              <ChevronUp
-                className="cursor-pointer text-slate-400 hover:text-black"
-                onClick={toggleExpansion}
-              />
-            ) : (
-              <ChevronDown
-                className="cursor-pointer text-slate-400 hover:text-black"
-                onClick={toggleExpansion}
-              />
-            )}
-          </div>
-        </CardHeader>
-        <div
-          className={`overflow-hidden transition-all duration-500 ${
-            isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          <CardContent className="flex flex-col gap-2">
-            <CardDescription>{word.vocab_definition}</CardDescription>
-            <CardSubTitle>Context</CardSubTitle>
-            <p>{word.vocab_context}</p>
-            <CardSubTitle>Example</CardSubTitle>
-            <p>{word.vocab_example}</p>
-          </CardContent>
-          <CardFooter className="flex justify-between">
-            <Pencil className="cursor-pointer" />
-            <Trash2 className="cursor-pointer" />
-          </CardFooter>
+      <CardHeader>
+        <CardTitle>{word.vocab_word}</CardTitle>
+        <div className="flex justify-center">
+          {isExpanded ? (
+            <ChevronUp
+              className="cursor-pointer text-slate-400 hover:text-black"
+              onClick={toggleExpansion}
+            />
+          ) : (
+            <ChevronDown
+              className="cursor-pointer text-slate-400 hover:text-black"
+              onClick={toggleExpansion}
+            />
+          )}
         </div>
+      </CardHeader>
+      <div
+        className={`overflow-hidden transition-all duration-500 ${
+          isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <CardContent className="flex flex-col gap-2">
+          <CardDescription>{word.vocab_definition}</CardDescription>
+          <CardSubTitle>Context</CardSubTitle>
+          <p>{word.vocab_context}</p>
+          <CardSubTitle>Example</CardSubTitle>
+          <p>{word.vocab_example}</p>
+        </CardContent>
+        <CardFooter className="flex justify-between">
+          <Pencil className="cursor-pointer" />
+          <Trash2 className="cursor-pointer" />
+        </CardFooter>
       </div>
     </Card>
   );

@@ -17,9 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} flex items-start justify-evenly`}>
-        <Sidebar2 />
-        <main className=" w-full h-full p-4"> {children} </main>
+      <body className={`${poppins.className} relative flex flex-row`}>
+        <div className="flex flex-1">
+          <Sidebar2 />
+        </div>
+        <div className="flex-grow"> {children} </div>
       </body>
     </html>
   );

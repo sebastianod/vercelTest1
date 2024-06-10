@@ -22,7 +22,7 @@ export default async function Page() {
         {showVocab()}
       </div>
 
-      <div className="flex justify-center space-x-4">
+      {/* <div className="flex justify-center space-x-4">
         <ButtonLoading variant={"default"} isLoading={true}>
           Click Me
         </ButtonLoading>
@@ -34,7 +34,7 @@ export default async function Page() {
           Click Me
         </ButtonLoading>
         <ButtonLoading variant={"ghost"}>Click Me</ButtonLoading>
-      </div>
+      </div> */}
     </div>
   );
 }

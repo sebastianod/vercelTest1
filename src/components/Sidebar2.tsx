@@ -22,8 +22,8 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`flex min-h-screen flex-col items-start gap-4 rounded-md border bg-slate-900 p-4 text-white transition-all duration-300 ${
-        isExpanded ? "w-[250px] min-w-[250px] overflow-hidden" : "w-14"
+      className={`z-10 flex h-full flex-col items-start gap-4 bg-slate-900 p-4 text-white transition-all duration-300 ${
+        isExpanded ? "z-10 w-[250px] min-w-[250px] overflow-hidden" : "w-14"
       }`}
     >
       <div className="flex w-full justify-between">

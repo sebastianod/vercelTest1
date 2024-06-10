@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -20,9 +19,8 @@ import {
 import { ButtonLoading } from "./buttonLoading";
 import { Textarea } from "./textarea";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,6 +30,7 @@ export function DialogCreateVocab() {
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean | null>(
     null,
   );
+  const [open, setOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const formSchema = z.object({
@@ -59,6 +58,13 @@ export function DialogCreateVocab() {
     },
   });
 
+  const { reset } = form;
+  const { isSubmitting, isSubmitSuccessful } = form.formState;
+
+  useEffect(() => {
+    isSubmitSuccessful && reset();
+  }, [isSubmitSuccessful, reset]);
+
   async function submitNewVocab(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     try {
@@ -70,8 +76,9 @@ export function DialogCreateVocab() {
         vocab_example: values.example,
       };
       const success = await insertVocabItem(newItem);
-      setSubmissionSuccess(success);
+      setSubmissionSuccess(isSubmitting);
       setIsLoading(false);
+      setOpen(false); //close dialog
       console.log("success?", success);
     } catch (error) {
       console.error("Error inserting vocabulary item:", error);
@@ -82,11 +89,11 @@ export function DialogCreateVocab() {
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="w-60">
+        <ButtonLoading variant="outline" isLoading={isLoading} className="w-60">
           <Plus />
-        </Button>
+        </ButtonLoading>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -95,6 +102,7 @@ export function DialogCreateVocab() {
         </DialogHeader>
         <Form {...form}>
           <form
+            id="vocab-form"
             onSubmit={form.handleSubmit(submitNewVocab)}
             className="space-y-8"
           >
@@ -169,13 +177,12 @@ export function DialogCreateVocab() {
                 )}
               />
             </div>
-            <ButtonLoading type="submit" isLoading={isLoading}>
-              Submit
-            </ButtonLoading>
           </form>
         </Form>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <ButtonLoading type="submit" form="vocab-form" isLoading={isLoading}>
+            Save changes
+          </ButtonLoading>
         </DialogFooter>
       </DialogContent>
     </Dialog>

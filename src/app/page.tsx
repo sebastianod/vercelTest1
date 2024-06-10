@@ -1,4 +1,4 @@
-import { ButtonLoading } from "@/components/ui/buttonLoading";
+// import { ButtonLoading } from "@/components/ui/buttonLoading";
 import VocabCard from "@/components/ui/VocabCard";
 //import words from "../lib/vocabData.json"; //mock data
 import { fetchAllVocabInstantFeedback } from "@/lib/data";

@@ -13,12 +13,12 @@ export default async function Page() {
   };
 
   return (
-    <div className="flex flex-col justify-center gap-4">
+    <div className="mb-96 ml-4 mr-4 mt-4 flex flex-col justify-center gap-4">
       <div className="flex justify-center">
         <DialogCreateVocab />
       </div>
 
-      <div className="grid auto-rows-max grid-cols-1 justify-items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid auto-rows-max grid-cols-1 justify-items-center gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {showVocab()}
       </div>
 

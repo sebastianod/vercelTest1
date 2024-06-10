@@ -11,16 +11,14 @@ export default async function Page() {
   const showVocab = () => {
     return words.map((wordItem, i) => <VocabCard key={i} word={wordItem} />);
   };
-
+  //grid auto-rows-max grid-cols-1 justify-items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
   return (
     <div className="flex flex-col justify-center gap-4">
       <div className="flex justify-center">
         <DialogCreateVocab />
       </div>
 
-      <div className="grid auto-rows-max grid-cols-1 justify-items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {showVocab()}
-      </div>
+      <div className="columns-xs">{showVocab()}</div>
 
       {/* <div className="flex justify-center space-x-4">
         <ButtonLoading variant={"default"} isLoading={true}>

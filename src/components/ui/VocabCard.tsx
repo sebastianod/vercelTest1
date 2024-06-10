@@ -37,7 +37,7 @@ const VocabCard: React.FC<VocabCardProps> = ({ word }) => {
   //     objectPosition="center"
 
   return (
-    <Card className="h-fit min-w-60 max-w-max transition duration-300 ease-out hover:scale-[1.02] hover:shadow-slate-700">
+    <Card className="h-fit w-80 transition duration-300 ease-out hover:scale-[1.02] hover:shadow-slate-700">
       {word.vocab_image_url && (
         <div className="relative aspect-[500/300]">
           <CardImage

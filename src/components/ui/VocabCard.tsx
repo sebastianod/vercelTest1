@@ -57,7 +57,7 @@ const VocabCard: React.FC<VocabCardProps> = ({ word }) => {
         />
       </div>
 
-      <div className={`${word.vocab_image_url ? "" : "flex flex-col"}`}>
+      <div>
         <CardHeader>
           <CardTitle>{word.vocab_word}</CardTitle>
           <div className="flex justify-center">

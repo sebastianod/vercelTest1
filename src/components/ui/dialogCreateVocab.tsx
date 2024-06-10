@@ -84,7 +84,7 @@ export function DialogCreateVocab() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" className="w-60">
           <Plus />
         </Button>
       </DialogTrigger>

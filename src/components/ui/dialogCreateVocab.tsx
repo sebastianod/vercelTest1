@@ -25,8 +25,10 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertVocabItem } from "@/lib/data";
+import { useRouter } from "next/navigation";
 
 export function DialogCreateVocab() {
+  const router = useRouter();
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean | null>(
     null,
   );
@@ -80,6 +82,7 @@ export function DialogCreateVocab() {
       setIsLoading(false);
       setOpen(false); //close dialog
       console.log("success?", success);
+      router.refresh();
     } catch (error) {
       console.error("Error inserting vocabulary item:", error);
       setSubmissionSuccess(false);

@@ -32,9 +32,6 @@ const VocabCard: React.FC<VocabCardProps> = ({ word }) => {
     setIsExpanded(!isExpanded);
   };
 
-  // layout="fill"
-  //     objectFit="cover"
-  //     objectPosition="center"
   const imageUrl = word.vocab_image_url
     ? word.vocab_image_url
     : "/defaultImage.png";

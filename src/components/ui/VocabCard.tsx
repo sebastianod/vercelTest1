@@ -40,7 +40,7 @@ const VocabCard: React.FC<VocabCardProps> = ({ word }) => {
     : "/defaultImage.png";
 
   return (
-    <Card className="h-fit min-w-64 max-w-3xl break-inside-avoid rounded-md border transition duration-300 ease-out hover:scale-[1.02] hover:shadow-slate-700">
+    <Card className="h-fit min-w-64 max-w-3xl break-inside-avoid rounded-lg border transition duration-300 ease-out hover:scale-[1.02] hover:shadow-slate-700">
       <div className="relative aspect-[500/300]">
         <CardImage
           src={imageUrl}

@@ -8,22 +8,19 @@ CREATE TABLE LearningTypes (
     learning_types_name VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE Users (
-    user_id SERIAL PRIMARY KEY,
-    users_name VARCHAR(100) NOT NULL,
-    users_last_name VARCHAR(100) NOT NULL,
-    users_email VARCHAR(100) NOT NULL UNIQUE,
-    users_avatar VARCHAR(255),
-    users_learning_type_id INTEGER REFERENCES LearningTypes(type_id) ON DELETE SET NULL,
-    users_role_id INTEGER REFERENCES Roles(role_id) ON DELETE SET NULL,
-    users_class_id INTEGER REFERENCES Classes(class_id) ON DELETE SET NULL,
-    users_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE profiles (
+   profiles_id uuid references auth.users on delete cascade not null primary key,
+ profiles_name VARCHAR(100) NOT NULL,
+ profiles_email VARCHAR(100) NOT NULL UNIQUE,
+ profiles_avatar VARCHAR(255),
+ profiles_created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+ profiles_updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE Classes (
     class_id SERIAL PRIMARY KEY,
     classes_name VARCHAR(100) NOT NULL,
-    classes_created_by INTEGER REFERENCES Users(user_id) ON DELETE SET NULL,
+    classes_created_by INTEGER REFERENCES profiles(profiles_id) ON DELETE SET NULL,
     classes_start_date DATE,
     classes_end_date DATE,
     classes_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -32,13 +29,13 @@ CREATE TABLE Classes (
 
 CREATE TABLE ClassTeachers (
     class_id INTEGER REFERENCES Classes(class_id),
-    class_teachers_mentor_id INTEGER REFERENCES Users(user_id),
+    class_teachers_mentor_id INTEGER REFERENCES profiles(profiles_id),
     PRIMARY KEY (class_id, class_teachers_mentor_id)
 );
 
 CREATE TABLE ClassStudents (
     class_id INTEGER REFERENCES Classes(class_id),
-    class_students_student_id INTEGER REFERENCES Users(user_id),
+    class_students_student_id INTEGER REFERENCES profiles(profiles_id),
     PRIMARY KEY (class_id, class_students_student_id)
 );
 
@@ -50,14 +47,14 @@ CREATE TABLE Goals (
     goals_type VARCHAR(50) NOT NULL,
     goals_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     goals_achieved BOOLEAN NOT NULL,
-    goals_user_id INTEGER REFERENCES Users(user_id) ON DELETE CASCADE
+    goals_profiles_id INTEGER REFERENCES profiles(profiles_id) ON DELETE CASCADE
 );
 
 CREATE TABLE InstantFeedback (
     instant_feedback_id SERIAL PRIMARY KEY,
     instant_feedback_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     instant_feedback_class_id INTEGER REFERENCES Classes(class_id),
-    instant_feedback_created_by_id INTEGER REFERENCES Users(user_id)
+    instant_feedback_created_by_id INTEGER REFERENCES profiles(profiles_id)
 );
 
 CREATE TABLE VocabularyCards (
@@ -71,7 +68,7 @@ CREATE TABLE VocabularyCards (
     vocab_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     vocab_class_id INTEGER REFERENCES Classes(class_id) ON DELETE CASCADE,
     vocab_instant_feedback_id INTEGER REFERENCES InstantFeedback(instant_feedback_id) ON DELETE SET NULL,
-    vocab_created_by_id INTEGER REFERENCES Users(user_id) ON DELETE SET NULL
+    vocab_created_by_id INTEGER REFERENCES profiles(profiles_id) ON DELETE SET NULL
 );
 
 CREATE TABLE GrammarCards (
@@ -83,7 +80,7 @@ CREATE TABLE GrammarCards (
     grammar_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     grammar_class_id INTEGER REFERENCES Classes(class_id) ON DELETE CASCADE,
     grammar_instant_feedback_id INTEGER REFERENCES InstantFeedback(instant_feedback_id) ON DELETE SET NULL,
-    grammar_created_by_id INTEGER REFERENCES Users(user_id) ON DELETE SET NULL
+    grammar_created_by_id INTEGER REFERENCES profiles(profiles_id) ON DELETE SET NULL
 );
 
 CREATE TABLE PronunciationCards (
@@ -95,12 +92,12 @@ CREATE TABLE PronunciationCards (
     pronunciation_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     pronunciation_class_id INTEGER REFERENCES Classes(class_id) ON DELETE CASCADE,
     pronunciation_instant_feedback_id INTEGER REFERENCES InstantFeedback(instant_feedback_id) ON DELETE SET NULL,
-    pronunciation_created_by_id INTEGER REFERENCES Users(user_id) ON DELETE SET NULL
+    pronunciation_created_by_id INTEGER REFERENCES profiles(profiles_id) ON DELETE SET NULL
 );
 
 CREATE TABLE Attendance (
     attendance_id SERIAL PRIMARY KEY,
-    attendance_user_id INTEGER REFERENCES Users(user_id) ON DELETE CASCADE,
+    attendance_profiles_id INTEGER REFERENCES profiles(profiles_id) ON DELETE CASCADE,
     attendance_status VARCHAR(50) NOT NULL,
     attendance_session_date TIMESTAMP NOT NULL,
     attendance_class_id INTEGER REFERENCES Classes(class_id) ON DELETE CASCADE
@@ -108,7 +105,7 @@ CREATE TABLE Attendance (
 
 CREATE TABLE Quizzes (
     quiz_id SERIAL PRIMARY KEY,
-    quizzes_created_by INTEGER REFERENCES Users(user_id) ON DELETE SET NULL,
+    quizzes_created_by INTEGER REFERENCES profiles(profiles_id) ON DELETE SET NULL,
     quizzes_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     quizzes_type VARCHAR(50) NOT NULL
 );
@@ -116,7 +113,7 @@ CREATE TABLE Quizzes (
 CREATE TABLE AssignedQuizzes (
     assigned_quiz_id SERIAL PRIMARY KEY,
     assigned_quiz_quiz_id INTEGER REFERENCES Quizzes(quiz_id) ON DELETE CASCADE,
-    assigned_quiz_created_by INTEGER REFERENCES Users(user_id) ON DELETE SET NULL,
+    assigned_quiz_created_by INTEGER REFERENCES profiles(profiles_id) ON DELETE SET NULL,
     assigned_quiz_assigned_to INTEGER REFERENCES Classes(class_id) ON DELETE CASCADE,
     assigned_quiz_type VARCHAR(50) NOT NULL,
     assigned_quiz_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -134,7 +131,7 @@ CREATE TABLE QuizQuestions (
 
 CREATE TABLE StudentAnswers (
     student_answers_id SERIAL PRIMARY KEY,
-    student_answers_user_id INTEGER REFERENCES Users(user_id) ON DELETE CASCADE,
+    student_answers_profiles_id INTEGER REFERENCES profiles(profiles_id) ON DELETE CASCADE,
     student_answers_quiz_id INTEGER REFERENCES Quizzes(quiz_id) ON DELETE CASCADE,
     student_answers_question_id INTEGER REFERENCES QuizQuestions(question_id) ON DELETE CASCADE,
     student_answers_response TEXT NOT NULL,
@@ -142,7 +139,7 @@ CREATE TABLE StudentAnswers (
 );
 
 CREATE TABLE Scores (
-    scores_user_id INTEGER REFERENCES Users(user_id) ON DELETE CASCADE,
+    scores_profiles_id INTEGER REFERENCES profiles(profiles_id) ON DELETE CASCADE,
     scores_class_id INTEGER REFERENCES Classes(class_id) ON DELETE CASCADE,
     scores_goals_achieved INTEGER NOT NULL,
     scores_attendance INTEGER NOT NULL,
@@ -155,7 +152,7 @@ CREATE TABLE Scores (
     scores_quizzes_taken INTEGER NOT NULL,
     scores_avg_quizzes_week FLOAT NOT NULL,
     scores_avg_quiz_questions FLOAT NOT NULL,
-    PRIMARY KEY (scores_user_id, scores_class_id)
+    PRIMARY KEY (scores_profiles_id, scores_class_id)
 );
 -- I actually have this table in the DB
 CREATE TABLE VocabularyCards (
